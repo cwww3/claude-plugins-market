@@ -1,0 +1,24 @@
+{
+  "name": "cwww3",
+  "owner": {
+    "name": "cwww3",
+    "url": "https://github.com/cwww3"
+  },
+  "metadata": {
+    "description": "Plugin marketplace for Claude Code extensions",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "learning",
+      "description": "learning guide",
+      "version": "1.0.0",
+      "author": {
+        "name": "cwww3"
+      },
+      "homepage": "https://github.com/cwww3/claude-plugins-market",
+      "tags": ["learning"],
+      "source": "./plugins/learning"
+    }
+  ]
+}
