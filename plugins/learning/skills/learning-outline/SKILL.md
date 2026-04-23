@@ -92,6 +92,17 @@ Add a **📚 推荐学习资源 (Recommended Resources)** section organized by t
 - **🛠️ 实践项目 Projects**: 2–3 project ideas to apply knowledge
 - **🌐 社区 Communities**: 1–2 communities (Discord, Reddit, GitHub orgs)
 
+### Step 5: Refinement Checkpoint
+
+After completing the full output, add a brief closing prompt:
+
+> 以上是 [领域] 的完整学习大纲。如需调整，可以告诉我：
+> - 某个分支需要更深/更浅
+> - 想聚焦特定学习路径
+> - 补充某类资源（如中文资料、视频课程）
+
+If the user responds with adjustments, update only the relevant section — do not regenerate the entire outline.
+
 ## Formatting Rules
 
 - Use Chinese for section headers and labels, English for technical terms when appropriate
