@@ -47,6 +47,12 @@ Always output the outline in this 4-level hierarchy:
 
 ### Step 2: Generate the 4-Level Outline
 
+**Background adaptation** (if user provided goal/background in Step 1 or original message):
+- Experienced in adjacent field → mark overlapping modules as `P3 进阶` / `🔴 高级`; add a note "(可快速过)" in their 简介
+- Beginner with no prior background → emphasize `P1 必学` / `🟢 入门` modules first; keep sub-topics fewer and more concrete
+- Researcher goal → elevate theory/paper-reading modules to P1; deprioritize production tooling
+- Engineer/practitioner goal → elevate hands-on modules to P1; deprioritize pure theory
+
 Structure the output as follows:
 
 #### Level 1 — Domain Overview
