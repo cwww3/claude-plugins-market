@@ -35,12 +35,15 @@ Always output the outline in this 4-level hierarchy:
 
 ### Step 1: Clarify Before Generating (if needed)
 
-If the user's domain is vague or very broad (e.g., "AI", "programming"), ask ONE clarifying question:
+**When to skip**: Domain is specific enough (e.g., "Rust", "MLOps") OR the user already stated goal/background in their message.
 
+**When to ask**: Domain is vague or very broad (e.g., "AI", "programming"). Ask ONE question:
 - **Goal**: Are you aiming to be a practitioner/engineer, researcher, or general understanding?
 - **Background**: Beginner, intermediate, or experienced in adjacent fields?
 
-Skip clarification if the request is already specific enough (e.g., "Rust programming language", "MLOps").
+**Fallbacks**:
+- If user says "just generate" / "skip" / doesn't answer → proceed with defaults: engineer goal, beginner level, apply to the domain as-is
+- If the request is not a learning intent (e.g., "debug my code", "explain this error") → gently redirect: "It looks like you need hands-on help rather than a learning roadmap — do you mean you'd like a structured outline for learning [related topic]?"
 
 ### Step 2: Generate the 4-Level Outline
 
