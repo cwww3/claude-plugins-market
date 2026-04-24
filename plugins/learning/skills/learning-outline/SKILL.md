@@ -21,9 +21,15 @@ Generate a **4-level structured learning roadmap** for any knowledge domain.
 
 **When to skip**: Domain is specific enough (e.g., "Rust", "MLOps") OR the user already stated goal/background in their message.
 
-**When to ask**: Domain is vague or very broad (e.g., "AI", "programming"). Ask ONE question:
-- **Goal**: Are you aiming to be a practitioner/engineer, researcher, or general understanding?
-- **Background**: Beginner, intermediate, or experienced in adjacent fields?
+**When to ask**: Domain is vague or very broad (e.g., "AI", "programming"). Send **one message** covering both dimensions as a combo grid:
+
+| | 🆕 新手 (no prior background) | 🔁 有相邻经验 (adjacent field) | 📚 中级 (some experience in this field) |
+|---|---|---|---|
+| 🔧 工程实践 (build & ship) | A1 | A2 | A3 |
+| 🔬 研究深造 (research & papers) | B1 | B2 | B3 |
+| 🌐 通识了解 (general understanding) | C1 | C2 | C3 |
+
+Reply with a combo like **A1**, **B2**, etc. — or describe your situation directly. Reply "跳过" to generate with defaults.
 
 **Fallbacks**:
 - If user says "just generate" / "skip" / doesn't answer → proceed with defaults: engineer goal, beginner level, apply to the domain as-is
