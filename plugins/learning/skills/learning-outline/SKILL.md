@@ -15,22 +15,6 @@ description: >
 
 Generate a **4-level structured learning roadmap** for any knowledge domain.
 
-## Output Structure
-
-Always output the outline in this 4-level hierarchy:
-
-```
-领域 (Domain)
-├── 🌿 分支 Branch 1 — [branch description]
-│   ├── 📦 模块 Module 1.1 — [module description] [difficulty] [priority]
-│   │   ├── 📌 子主题 1.1.1 — [brief description]
-│   │   ├── 📌 子主题 1.1.2
-│   │   └── 📌 子主题 1.1.3
-│   └── 📦 Module 1.2 ...
-├── 🌿 Branch 2 ...
-└── ...
-```
-
 ## Step-by-Step Instructions
 
 ### Step 1: Clarify Before Generating (if needed)
@@ -53,7 +37,17 @@ Always output the outline in this 4-level hierarchy:
 - Researcher goal → elevate theory/paper-reading modules to P1; deprioritize production tooling
 - Engineer/practitioner goal → elevate hands-on modules to P1; deprioritize pure theory
 
-Structure the output as follows:
+Structure the output as the following 4-level hierarchy:
+
+```
+领域 (Domain)
+├── 🌿 Branch 1 — [one-sentence description]
+│   ├── 📦 Module 1.1 — [description] [🟢/🟡/🔴] [P1/P2/P3]
+│   │   ├── 📌 Sub-topic 1.1.1 — [5-word hint]
+│   │   └── 📌 Sub-topic 1.1.2
+│   └── 📦 Module 1.2 ...
+└── 🌿 Branch 2 ...
+```
 
 #### Level 1 — Domain Overview
 Start with a 2-3 sentence description of the domain: what it is, why it matters, and the overall learning journey.
