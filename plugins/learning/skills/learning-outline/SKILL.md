@@ -68,19 +68,28 @@ Specific concepts, techniques, or skills within each module. Keep these concise 
 
 ### Step 3: Learning Path Section
 
-After the outline, add a **📍 推荐学习路径 (Recommended Learning Path)** section:
+After the outline, add a **📍 推荐学习路径 (Recommended Learning Path)** section.
+
+**Selection rules** (use actual module names from the outline above, not placeholders):
+- 🚀 **快速入门路径** (~1-3 months): all `P1 必学` modules only, ordered by dependency (foundational first)
+- 🎯 **系统学习路径** (~6-12 months): all `P1 + P2` modules, grouped by branch in logical progression order
+- 🔬 **深度进阶路径** (ongoing): `P3 进阶` modules + cross-branch synthesis topics
+
+If user background was provided, annotate paths accordingly:
+- Adjacent field experience → mark skippable modules with `(可跳过)`
+- Researcher goal → swap production-tooling modules for paper/theory equivalents in the path
 
 ```
 🚀 快速入门路径 (Quick Start — ~1-3 months)
-→ [Module A] → [Module B] → [Module C]
+→ [实际模块名A] → [实际模块名B] → [实际模块名C]
 
 🎯 系统学习路径 (Systematic — ~6-12 months)
-→ Phase 1: [Branch X] (Modules: ...)
-→ Phase 2: [Branch Y] (Modules: ...)
-→ Phase 3: [Branch Z] (Modules: ...)
+→ Phase 1: [Branch X] (Modules: [实际模块名...])
+→ Phase 2: [Branch Y] (Modules: [实际模块名...])
+→ Phase 3: [Branch Z] (Modules: [实际模块名...])
 
 🔬 深度进阶路径 (Advanced — ongoing)
-→ Focus areas: [...]
+→ Focus areas: [实际P3模块名...]
 ```
 
 ### Step 4: Resource Recommendations
