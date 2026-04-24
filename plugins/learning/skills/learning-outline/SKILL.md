@@ -28,6 +28,7 @@ Generate a **4-level structured learning roadmap** for any knowledge domain.
 **Fallbacks**:
 - If user says "just generate" / "skip" / doesn't answer → proceed with defaults: engineer goal, beginner level, apply to the domain as-is
 - If the request is not a learning intent (e.g., "debug my code", "explain this error") → gently redirect: "It looks like you need hands-on help rather than a learning roadmap — do you mean you'd like a structured outline for learning [related topic]?"
+- If the domain is highly niche or specialized (e.g., "3D thermodynamic FEM analysis", "medieval historiography methods") and you have low confidence in covering it comprehensively → generate the outline at a higher level of abstraction (fewer sub-topics, broader branches), and add a note at the top: "⚠️ 这是一个专业细分领域，以下大纲基于通用学习框架，建议结合领域内的权威教材或专家建议进行调整。"
 
 ### Step 2: Generate the 4-Level Outline
 
