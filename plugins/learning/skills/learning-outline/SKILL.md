@@ -21,7 +21,7 @@ Generate a **4-level structured learning roadmap** for any knowledge domain.
 
 **When to skip**: Domain is specific enough (e.g., "Rust", "MLOps") OR the user already stated goal/background in their message.
 
-**When to ask**: Domain is vague or very broad (e.g., "AI", "programming"). Send **one message** covering both dimensions as a combo grid:
+**When to ask**: Domain is vague or very broad (e.g., "AI", "programming"), OR the domain is ambiguous enough that the timeline and competitive scoping would be unclear. Send **one message** covering both dimensions as a combo grid:
 
 | | 🆕 新手 (no prior background) | 🔁 有相邻经验 (adjacent field) | 📚 中级 (some experience in this field) |
 |---|---|---|---|
@@ -44,10 +44,19 @@ Reply with a combo like **A1**, **B2**, etc. — or describe your situation dire
 - Researcher goal → elevate theory/paper-reading modules to P1; deprioritize production tooling
 - Engineer/practitioner goal → elevate hands-on modules to P1; deprioritize pure theory
 
-Structure the output as the following 4-level hierarchy:
+Structure the output as follows:
 
 ```
 领域 (Domain)
+│
+├── 📜 纵向时间线 (Development Timeline)
+│   └── [key milestone 1] → [milestone 2] → [milestone 3] → ...
+│
+├── 🔄 横向竞品对比 (Competitive Landscape)
+│   ├── [Alternative A] — [one-line differentiator]
+│   ├── [Alternative B] — [one-line differentiator]
+│   └── [Alternative C] — [one-line differentiator]
+│
 ├── 🌿 Branch 1 — [one-sentence description]
 │   ├── 📦 Module 1.1 — [description] [🟢/🟡/🔴] [P1/P2/P3]
 │   │   ├── 📌 Sub-topic 1.1.1 — [5-word hint]
@@ -55,6 +64,28 @@ Structure the output as the following 4-level hierarchy:
 │   └── 📦 Module 1.2 ...
 └── 🌿 Branch 2 ...
 ```
+
+#### Section 0 — 📜 纵向时间线 (Development Timeline)
+
+Help the learner understand the domain's evolution — key turning points, paradigm shifts, and major releases that shaped the current landscape. This gives context for WHY things are the way they are.
+
+- **Length**: 3–7 key milestones, each one line
+- **Scope by domain type**:
+  - **工具/语言/框架** (e.g., Rust, Kubernetes, React): list origin, major version releases, ecosystem inflection points
+  - **概念/学科** (e.g., Machine Learning, Cybersecurity): list key eras, breakthrough papers, methodological paradigm shifts
+  - **泛领域** (e.g., Product Management): list evolution of the discipline, influential books/thought leaders
+- **Format**: a chronological chain `[年份/时期] 事件 — 一句话影响`, connected by `→` arrows or as a bulleted timeline
+
+#### Section 1 — 🔄 横向竞品对比 (Competitive Landscape)
+
+Help the learner understand where this domain/tool fits in the broader ecosystem. What are the alternatives, and when would you choose each?
+
+- **Length**: 3–5 alternatives, each with a one-line description + key differentiator
+- **Scope by domain type**:
+  - **工具/语言/框架**: compare to direct alternatives (e.g., Rust → C++, Go, Zig; React → Vue, Angular, Svelte)
+  - **概念/领域**: compare different schools of thought, methodologies, or sub-approaches (e.g., ML → supervised vs unsupervised vs RL; Databases → SQL vs NoSQL vs NewSQL)
+  - **泛领域**: compare adjacent roles, frameworks, or lenses for approaching the domain
+- **Format**: a comparison list. End with a concise **"选型建议" (selection guide)**: when to pick this domain's subject over its alternatives
 
 #### Level 1 — Domain Overview
 Start with a 2-3 sentence description of the domain: what it is, why it matters, and the overall learning journey.
@@ -116,6 +147,7 @@ After completing the full output, add a brief closing prompt:
 > - 某个分支需要更深/更浅
 > - 想聚焦特定学习路径
 > - 补充某类资源（如中文资料、视频课程）
+> - 调整时间线精度或竞品覆盖范围
 
 If the user responds with adjustments, update only the relevant section — do not regenerate the entire outline.
 
@@ -126,7 +158,7 @@ If the user responds with adjustments, update only the relevant section — do n
 - Use emoji icons consistently for visual hierarchy
 - Keep the outline scannable — don't over-explain at the sub-topic level
 - For very large domains (e.g., "Software Engineering"), focus on the most important 4–5 branches rather than trying to cover everything
-- Total output length: aim for **comprehensive but not overwhelming** — roughly 600–1200 words for the outline itself
+- Total output length: aim for **comprehensive but not overwhelming** — roughly 800–1500 words for the outline itself (including timeline and competitive comparison)
 
 ## Example Domains
 
