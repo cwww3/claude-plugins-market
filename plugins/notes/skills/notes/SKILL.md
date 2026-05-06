@@ -28,7 +28,14 @@ Today's date: !`date +%Y-%m-%d`
 Look at the current conversation and identify what to save:
 - If `$ARGUMENTS` was provided, treat it as a topic hint and find the relevant conclusions
 - Otherwise, identify the most recent and significant knowledge/conclusion discussed
-- Focus on distillable insights, not raw Q&A transcripts
+
+**Completeness requirements — do NOT omit:**
+- The core problem or question being addressed
+- All key concepts, mechanisms, or principles explained
+- Every important conclusion or decision and the reasoning behind it
+- All code snippets, commands, or configuration examples
+- Caveats, pitfalls, and edge cases mentioned
+- Any "why" explanations (not just "what")
 
 ## Step 2 — Determine Topic and Category
 
@@ -46,7 +53,7 @@ Look at the current conversation and identify what to save:
 
 ## Step 3 — Format Note Content
 
-Use this Obsidian-compatible markdown structure:
+Use this Obsidian-compatible markdown structure. **Omit any section that has no content — do not add empty headings.**
 
 ```
 # <Topic Name>
@@ -54,17 +61,36 @@ Use this Obsidian-compatible markdown structure:
 > 来源：Claude Code 对话
 > 日期：<YYYY-MM-DD>
 
-<Main content — key explanation, conclusions, and code snippets as needed.
-Write in the same language as the topic. Be thorough but concise.>
+## 背景 / 问题
 
-## 要点
+<What problem or question prompted this topic. Why does it matter.>
 
-- <bullet 1>
-- <bullet 2>
-- <bullet 3>
+## 核心概念 / 解决方案
+
+<Full explanation of the mechanism, concept, or solution. Cover all key points discussed.
+Use sub-headings (###) freely to organize multi-part content.>
+
+## 示例
+
+<Code snippets, commands, or concrete examples. Use fenced code blocks with language tags.>
+
+## 注意事项
+
+- <Caveat, pitfall, or edge case 1>
+- <Caveat, pitfall, or edge case 2>
+
+## 要点总结
+
+- <Key takeaway 1>
+- <Key takeaway 2>
+- <Key takeaway 3>
 ```
 
-For code snippets, use proper fenced code blocks with language tags.
+**Writing rules:**
+- Write in the same language as the primary content (Chinese or English)
+- Prefer completeness over brevity — a longer note that captures everything is better than a short one that loses context
+- Sub-headings and bullet lists over dense paragraphs
+- Every code example from the conversation must be preserved verbatim
 
 ## Step 4 — Write to Vault
 
