@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "prompt": "把这个结论记录到我的笔记里",
+    "expected": "从当前会话中提取关键知识/结论，智能判断合适的分类文件夹（如 Backend/AI/DevOps），以纯主题名命名文件，格式化为 Obsidian markdown，写入 $NOTESDIR/<category>/<topic>.md，最后报告保存路径和选择原因"
+  },
+  {
+    "id": 2,
+    "prompt": "/notes Docker网络模型",
+    "expected": "以 'Docker网络模型' 为主题，从会话中提取 Docker 网络相关结论，分类到 DevOps 或 Networking 文件夹，写入笔记，若文件已存在则追加并加分隔符"
+  },
+  {
+    "id": 3,
+    "prompt": "save this to my notes",
+    "expected": "如果 $NOTESDIR 未设置，提示用户配置环境变量；否则从会话提取内容，智能分类，写入 vault"
+  }
+]

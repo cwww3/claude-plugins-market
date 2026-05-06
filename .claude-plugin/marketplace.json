@@ -19,6 +19,17 @@
       "homepage": "https://github.com/cwww3/claude-plugins-market",
       "tags": ["learning"],
       "source": "./plugins/learning"
+    },
+    {
+      "name": "notes",
+      "description": "Save Claude Code conversation knowledge and conclusions to an Obsidian vault, organized by category",
+      "version": "1.0.0",
+      "author": {
+        "name": "cwww3"
+      },
+      "homepage": "https://github.com/cwww3/claude-plugins-market",
+      "tags": ["notes", "obsidian", "knowledge"],
+      "source": "./plugins/notes"
     }
   ]
 }
