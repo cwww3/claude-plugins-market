@@ -6,7 +6,6 @@ description: >
   "把这个知识点记一下", "save this to notes", "add to my notes", "write this to notes", or calls /notes.
   Reads the vault path from the $NOTESDIR environment variable. Intelligently categorizes notes into
   subfolders, and appends to existing files rather than overwriting.
-disable-model-invocation: true
 argument-hint: "[topic hint — optional]"
 allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Read, Write
 ---
