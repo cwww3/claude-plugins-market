@@ -1,16 +1,16 @@
 ---
-name: notes
+name: notes-save
 description: >
   Save knowledge, conclusions, or key insights from the current conversation to the user's Obsidian
   notes vault. Use when user says things like: "保存到笔记", "记录这个结论", "记下来", "记到笔记里",
-  "把这个知识点记一下", "save this to notes", "add to my notes", "write this to notes", or calls /notes.
+  "把这个知识点记一下", "save this to notes", "add to my notes", "write this to notes", or calls /notes-save.
   Reads the vault path from the $NOTESDIR environment variable. Intelligently categorizes notes into
   subfolders, and appends to existing files rather than overwriting.
 argument-hint: "[topic hint — optional]"
 allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Read, Write
 ---
 
-# Notes — Save to Obsidian Vault
+# Notes Save — Save to Obsidian Vault
 
 Save key knowledge or conclusions from the current conversation to the user's Obsidian vault.
 

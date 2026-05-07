@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "prompt": "讨论文章，帮我看看收集的文章",
+    "expected": "列出 $NOTESDIR/articles/ 目录下的可用文章，让用户选择一篇，读取后给出结构化摘要并引导讨论"
+  },
+  {
+    "id": 2,
+    "prompt": "/notes-discuss my-article.md",
+    "expected": "读取 $NOTESDIR/articles/my-article.md，给出文章概览摘要，然后引导用户讨论"
+  },
+  {
+    "id": 3,
+    "prompt": "帮我看这篇文章",
+    "expected": "列出文章目录中的可用文章，让用户选择后读取、总结、引导讨论"
+  }
+]

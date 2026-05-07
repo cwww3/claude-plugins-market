@@ -22,13 +22,13 @@
     },
     {
       "name": "notes",
-      "description": "Save Claude Code conversation knowledge and conclusions to an Obsidian vault, organized by category",
-      "version": "1.1.0",
+      "description": "Save Claude Code conversation knowledge to Obsidian vault and discuss web-clipped articles from $NOTESDIR/articles/",
+      "version": "1.2.0",
       "author": {
         "name": "cwww3"
       },
       "homepage": "https://github.com/cwww3/claude-plugins-market",
-      "tags": ["notes", "obsidian", "knowledge"],
+      "tags": ["notes", "obsidian", "knowledge", "articles"],
       "source": "./plugins/notes"
     }
   ]
