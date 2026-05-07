@@ -196,6 +196,11 @@ Add a **📚 推荐学习资源 (Recommended Resources)** section organized by t
 
 Replace weak recommendations with better ones found. Note the source inline: `（来源：roadmap.sh）`、`（来源：官方文档）`.
 
+**⚠️ URL 规则（严格执行）**：
+- 只使用从 Tavily 搜索结果 `results[].url` 中获取的 URL，或下列可信根域名的首页（`https://huggingface.co`、`https://github.com`、`https://arxiv.org` 等）
+- **禁止**凭记忆拼接或推测任何具体页面路径（如 `/p/xxx`、`/docs/yyy`）——路径极易出错
+- 若 Tavily 未返回可用链接，只写资源名称，不附 URL，并注明"（链接请自行搜索）"
+
 ### Step 5: Refinement Checkpoint
 
 After completing the full output, add a brief closing prompt:
