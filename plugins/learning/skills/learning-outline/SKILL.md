@@ -15,6 +15,18 @@ description: >
 
 Generate a **4-level structured learning roadmap** for any knowledge domain.
 
+## 工具说明
+
+### Tavily 搜索
+
+```bash
+curl -s -X POST https://api.tavily.com/search \
+  -H "Content-Type: application/json" \
+  -d "{\"api_key\": \"$TavilyToken\", \"query\": \"<query>\", \"search_depth\": \"<basic|advanced>\", \"max_results\": 5}"
+```
+
+`TavilyToken` 未设置或调用失败时，跳过搜索，仅使用训练数据继续。响应为 JSON，从 `results[].content` 提取正文，`results[].url` 获取来源链接。
+
 ## Step-by-Step Instructions
 
 ### Step 1: Clarify Before Generating (if needed)
@@ -38,17 +50,7 @@ Reply with a combo like **A1**, **B2**, etc. — or describe your situation dire
 
 ### Step 2: Generate the 4-Level Outline
 
-**Fast-moving domain check** — before generating, judge whether the domain evolves rapidly (e.g., AI/ML, LLMOps, cloud-native, frontend frameworks, cybersecurity). If yes, proactively search 1–2 authoritative sources to ground the outline in current reality. Use the first available search tool in this order: **Tavily API** via Bash:
-```bash
-curl -s -X POST https://api.tavily.com/search \
-  -H "Content-Type: application/json" \
-  -d "{\"api_key\": \"$TavilyToken\", \"query\": \"<your query>\", \"search_depth\": \"basic\", \"max_results\": 5}"
-```
-If `TavilyToken` is unset or the call fails, skip the search and proceed with training data only.
-
-- Official documentation or release notes (e.g., `site:docs.python.org`, `site:kubernetes.io`)
-- Curated learning maps (e.g., `roadmap.sh/<domain>`, `missing.csail.mit.edu`)
-- Recent practitioner consensus (e.g., top HN/Reddit threads on "learning [domain] 2025")
+**Fast-moving domain check** — before generating, judge whether the domain evolves rapidly (e.g., AI/ML, LLMOps, cloud-native, frontend frameworks, cybersecurity). If yes, proactively search 1–2 authoritative sources to ground the outline in current reality. 用 Tavily 搜索（`basic`，见顶部工具说明），建议查询词：`<domain> current state 2025`、`<domain> roadmap 2025`、`best way to learn <domain> 2025 site:reddit.com`。重点参考官方文档、roadmap.sh、HN/Reddit 社区共识等来源的结果。
 
 Use findings to adjust the branch structure, module priorities, and timeline before writing anything. For stable domains (algorithms, operating systems, economics), skip this — training data is sufficient.
 
@@ -84,7 +86,7 @@ Structure the output as follows:
 └── 🌿 Branch 2 ...
 ```
 
-#### Section -1 — 🧠 核心心智模型 (Core Mental Model)
+#### 前置节 1 — 🧠 核心心智模型 (Core Mental Model)
 
 The goal is a single "aha" paragraph that anchors everything else. Before the learner sees any timeline or roadmap, they need one mental peg to hang everything on.
 
@@ -96,7 +98,7 @@ Write three short bullets:
 
 Keep the whole section to 3–5 lines. The point is sharpness, not comprehensiveness.
 
-#### Section 0 — 📜 纵向时间线 (Development Timeline)
+#### 前置节 2 — 📜 纵向时间线 (Development Timeline)
 
 Help the learner understand the domain's evolution — key turning points, paradigm shifts, and major releases that shaped the current landscape. This gives context for WHY things are the way they are.
 
@@ -107,7 +109,7 @@ Help the learner understand the domain's evolution — key turning points, parad
   - **泛领域** (e.g., Product Management): list evolution of the discipline, influential books/thought leaders
 - **Format**: a chronological chain `[年份/时期] 事件 — 一句话影响`, connected by `→` arrows or as a bulleted timeline
 
-#### Section 1 — 🔄 横向竞品对比 (Competitive Landscape)
+#### 前置节 3 — 🔄 横向竞品对比 (Competitive Landscape)
 
 Help the learner understand where this domain/tool fits in the broader ecosystem. What are the alternatives, and when would you choose each?
 
@@ -190,18 +192,7 @@ Add a **📚 推荐学习资源 (Recommended Resources)** section organized by t
 - **🛠️ 实践项目 Projects**: 2–3 project ideas to apply knowledge
 - **🌐 社区 Communities**: 1–2 communities (Discord, Reddit, GitHub orgs)
 
-**Resource freshness** — always fetch latest recommendations from authoritative sources before finalising this section. Use the first available search tool in this order: **Tavily API** via Bash:
-```bash
-curl -s -X POST https://api.tavily.com/search \
-  -H "Content-Type: application/json" \
-  -d "{\"api_key\": \"$TavilyToken\", \"query\": \"<your query>\", \"search_depth\": \"basic\", \"max_results\": 5}"
-```
-If `TavilyToken` is unset or the call fails, skip the search and proceed with training data only.
-
-- Up-to-date course recommendations: `best [domain] courses 2025 site:reddit.com` or `site:roadmap.sh/[domain]`
-- Official documentation for the latest stable version and recommended learning paths
-- Recently published books or updated editions: `[domain] book 2024 OR 2025`
-- Practitioner-curated lists: awesome-[domain] GitHub repos, HN "ask HN: how to learn [domain]" threads
+**Resource freshness** — always fetch latest recommendations from authoritative sources before finalising this section. 用 Tavily 搜索（`advanced`，见顶部工具说明），建议查询词：`best <domain> courses 2025 site:reddit.com`、`<domain> book 2024 OR 2025`、`awesome <domain> github`。重点参考 roadmap.sh、Reddit、HN、官方文档、awesome-* 仓库等来源的结果。
 
 Replace weak recommendations with better ones found. Note the source inline: `（来源：roadmap.sh）`、`（来源：官方文档）`.
 
