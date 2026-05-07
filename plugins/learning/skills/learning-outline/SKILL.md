@@ -38,6 +38,20 @@ Reply with a combo like **A1**, **B2**, etc. — or describe your situation dire
 
 ### Step 2: Generate the 4-Level Outline
 
+**Fast-moving domain check** — before generating, judge whether the domain evolves rapidly (e.g., AI/ML, LLMOps, cloud-native, frontend frameworks, cybersecurity). If yes, proactively search 1–2 authoritative sources to ground the outline in current reality. Use the first available search tool in this order: **Tavily API** via Bash:
+```bash
+curl -s -X POST https://api.tavily.com/search \
+  -H "Content-Type: application/json" \
+  -d "{\"api_key\": \"$TavilyToken\", \"query\": \"<your query>\", \"search_depth\": \"basic\", \"max_results\": 5}"
+```
+If `TavilyToken` is unset or the call fails, skip the search and proceed with training data only.
+
+- Official documentation or release notes (e.g., `site:docs.python.org`, `site:kubernetes.io`)
+- Curated learning maps (e.g., `roadmap.sh/<domain>`, `missing.csail.mit.edu`)
+- Recent practitioner consensus (e.g., top HN/Reddit threads on "learning [domain] 2025")
+
+Use findings to adjust the branch structure, module priorities, and timeline before writing anything. For stable domains (algorithms, operating systems, economics), skip this — training data is sufficient.
+
 **Background adaptation** (if user provided goal/background in Step 1 or original message):
 - Experienced in adjacent field → mark overlapping modules as `P3 进阶` / `🔴 高级`; add a note "(可快速过)" in their 简介
 - Beginner with no prior background → emphasize `P1 必学` / `🟢 入门` modules first; keep sub-topics fewer and more concrete
@@ -48,6 +62,11 @@ Structure the output as follows:
 
 ```
 领域 (Domain)
+│
+├── 🧠 核心心智模型 (Core Mental Model)
+│   ├── 一句话直觉: [用生活类比点破这个领域的本质，让门外汉也能"哦原来如此"]
+│   ├── 解决的问题: [没有它之前，人们用什么痛苦的方式处理这个问题]
+│   └── 最常见误区: [初学者最容易产生的错误认知，一句话点明]
 │
 ├── 📜 纵向时间线 (Development Timeline)
 │   └── [key milestone 1] → [milestone 2] → [milestone 3] → ...
@@ -64,6 +83,18 @@ Structure the output as follows:
 │   └── 📦 Module 1.2 ...
 └── 🌿 Branch 2 ...
 ```
+
+#### Section -1 — 🧠 核心心智模型 (Core Mental Model)
+
+The goal is a single "aha" paragraph that anchors everything else. Before the learner sees any timeline or roadmap, they need one mental peg to hang everything on.
+
+Write three short bullets:
+
+- **一句话直觉**: A concrete, everyday analogy that captures the domain's essence. Avoid using technical comparisons — compare to cooking, city planning, a library, a game, etc. The test: could a middle-schooler nod along?
+- **解决的问题**: Describe the pain that existed *before* this domain/tool existed. Make it vivid. "Before X, engineers had to manually..." is the pattern. The contrast makes the domain feel necessary, not abstract.
+- **最常见误区**: Name the single most common wrong mental model that beginners carry. Be specific to this domain — don't write generic advice. Example: "初学者常以为 Docker 就是虚拟机，但它共享宿主内核，启动快百倍、但隔离性也弱得多。"
+
+Keep the whole section to 3–5 lines. The point is sharpness, not comprehensiveness.
 
 #### Section 0 — 📜 纵向时间线 (Development Timeline)
 
@@ -97,7 +128,9 @@ Major sub-disciplines or thematic pillars of the domain. Each branch gets:
 
 #### Level 3 — Modules (3–6 per branch)
 Concrete learning units within each branch. Each module gets:
-- **📘 简介 (Description)**: 1–2 sentences explaining what this module covers and why it matters
+- **📘 简介 (Description)**: Two sentences in problem-driven order — first, name the concrete pain or confusion that arises *without* this knowledge ("不懂这个，你会…" or "没有它，开发者只能…"); second, explain how this module resolves that pain. This framing makes every module feel necessary rather than academic.
+  - Bad: "介绍异步编程的概念和 async/await 语法。"
+  - Good: "不懂异步，你的程序一旦等待网络或磁盘就会完全卡死，用户体验崩溃。async/await 让你写出'看起来同步、实际不阻塞'的代码。"
 - **⚡ 难度 (Difficulty)**: `🟢 入门` / `🟡 中级` / `🔴 高级`
 - **⭐ 优先级 (Priority)**: `P1 必学` / `P2 推荐` / `P3 进阶`
 
@@ -117,17 +150,35 @@ If user background was provided, annotate paths accordingly:
 - Adjacent field experience → mark skippable modules with `(可跳过)`
 - Researcher goal → swap production-tooling modules for paper/theory equivalents in the path
 
+Each step in the path must state its learning purpose — not just what to study, but why this step comes here and what it unlocks. The format for each step is:
+
+```
+→ [模块名] — 学完能做到：[一句话描述学完后新获得的能力或理解]
+              为什么在这里：[一句话说明它为后续步骤铺路，或没有它后续无法进行]
+```
+
+The "学完能做到" line should describe a concrete, observable outcome ("能独立写出…", "能看懂…", "能排查…"), not an abstract concept. The "为什么在这里" line should make the dependency or sequencing logic explicit — if the order doesn't matter, say so.
+
+Apply this format to all three paths:
+
 ```
 🚀 快速入门路径 (Quick Start — ~1-3 months)
-→ [实际模块名A] → [实际模块名B] → [实际模块名C]
+→ [实际模块名A]
+   学完能做到：[具体能力]
+   为什么在这里：[铺路原因，或"入门起点，无前置依赖"]
+→ [实际模块名B]
+   学完能做到：[具体能力]
+   为什么在这里：[依赖A的哪个知识点]
+→ [实际模块名C] ...
 
 🎯 系统学习路径 (Systematic — ~6-12 months)
-→ Phase 1: [Branch X] (Modules: [实际模块名...])
-→ Phase 2: [Branch Y] (Modules: [实际模块名...])
-→ Phase 3: [Branch Z] (Modules: [实际模块名...])
+→ Phase 1: [Branch X]
+   [模块名] — 学完能做到：[能力] / 为什么在这里：[原因]
+   [模块名] — 学完能做到：[能力] / 为什么在这里：[原因]
+→ Phase 2: [Branch Y] ...
 
 🔬 深度进阶路径 (Advanced — ongoing)
-→ Focus areas: [实际P3模块名...]
+→ [实际P3模块名] — 学完能做到：[能力] / 为什么在这里：[原因]
 ```
 
 ### Step 4: Resource Recommendations
@@ -138,6 +189,21 @@ Add a **📚 推荐学习资源 (Recommended Resources)** section organized by t
 - **🎓 课程 Courses**: 3–5 courses (Coursera, edX, Udemy, YouTube channels, official docs)
 - **🛠️ 实践项目 Projects**: 2–3 project ideas to apply knowledge
 - **🌐 社区 Communities**: 1–2 communities (Discord, Reddit, GitHub orgs)
+
+**Resource freshness** — always fetch latest recommendations from authoritative sources before finalising this section. Use the first available search tool in this order: **Tavily API** via Bash:
+```bash
+curl -s -X POST https://api.tavily.com/search \
+  -H "Content-Type: application/json" \
+  -d "{\"api_key\": \"$TavilyToken\", \"query\": \"<your query>\", \"search_depth\": \"basic\", \"max_results\": 5}"
+```
+If `TavilyToken` is unset or the call fails, skip the search and proceed with training data only.
+
+- Up-to-date course recommendations: `best [domain] courses 2025 site:reddit.com` or `site:roadmap.sh/[domain]`
+- Official documentation for the latest stable version and recommended learning paths
+- Recently published books or updated editions: `[domain] book 2024 OR 2025`
+- Practitioner-curated lists: awesome-[domain] GitHub repos, HN "ask HN: how to learn [domain]" threads
+
+Replace weak recommendations with better ones found. Note the source inline: `（来源：roadmap.sh）`、`（来源：官方文档）`.
 
 ### Step 5: Refinement Checkpoint
 
