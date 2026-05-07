@@ -1,19 +1,31 @@
 ---
-name: learning-outline
+name: notes-learning
 description: >
   Generate a complete, systematic, and detailed learning roadmap/outline for any knowledge domain,
   especially technical and programming fields (e.g., AI/ML, backend development, system design,
-  cloud computing, a programming language, a framework, cybersecurity, data science, DevOps, etc.).
-  Use this skill whenever the user says things like "I want to learn X", "give me a learning roadmap for X",
-  "how do I get started with X", "help me learn X systematically", "give me an outline for X",
-  "梳理X的学习大纲", "我想学X", "帮我规划X的学习路径", or any similar intent to systematically
-  learn or understand a field. Always trigger this skill for structured learning requests —
-  even if the domain seems simple, the user benefits from a comprehensive breakdown.
+  cloud computing, a programming language, a framework, cybersecurity, data science, DevOps, etc.),
+  and save the generated outline to $NOTESDIR/learning/. Use this skill whenever the user says
+  things like "I want to learn X", "give me a learning roadmap for X", "how do I get started with X",
+  "help me learn X systematically", "give me an outline for X", "梳理X的学习大纲", "我想学X",
+  "帮我规划X的学习路径", or any similar intent to systematically learn or understand a field.
+  Always trigger this skill for structured learning requests — even if the domain seems simple,
+  the user benefits from a comprehensive breakdown.
+argument-hint: "[domain — optional, e.g. 'Rust' or 'Kubernetes']"
+allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Bash(curl *), Read, Write
 ---
 
-# Learning Outline Generator
+# Notes Learning — Generate & Save Learning Outline
 
-Generate a **4-level structured learning roadmap** for any knowledge domain.
+Generate a **4-level structured learning roadmap** for any knowledge domain and save it to the user's Obsidian vault.
+
+## Environment Check
+
+Vault path: !`echo "${NOTESDIR:-⚠️  NOTESDIR is not set}"`
+
+已有学习大纲:
+!`[ -d "${NOTESDIR}/learning" ] && ls -1 "${NOTESDIR}/learning/"*.md 2>/dev/null | while IFS= read -r f; do basename "$f" .md; done | sort || echo "(还没有学习大纲)"`
+
+Today's date: !`date +%Y-%m-%d`
 
 ## 工具说明
 
@@ -31,7 +43,7 @@ curl -s -X POST https://api.tavily.com/search \
 
 ### Step 1: Clarify Before Generating (if needed)
 
-**When to skip**: Domain is specific enough (e.g., "Rust", "MLOps") OR the user already stated goal/background in their message.
+**When to skip**: Domain is specific enough (e.g., "Rust", "MLOps") OR the user already stated goal/background in their message. Also skip if `$ARGUMENTS` was provided with a specific domain.
 
 **When to ask**: Domain is vague or very broad (e.g., "AI", "programming"), OR the domain is ambiguous enough that the timeline and competitive scoping would be unclear. Send **one message** covering both dimensions as a combo grid:
 
@@ -201,9 +213,53 @@ Replace weak recommendations with better ones found. Note the source inline: `�
 - **禁止**凭记忆拼接或推测任何具体页面路径（如 `/p/xxx`、`/docs/yyy`）——路径极易出错
 - 若 Tavily 未返回可用链接，只写资源名称，不附 URL，并注明"（链接请自行搜索）"
 
-### Step 5: Refinement Checkpoint
+### Step 5: Save to Vault
 
-After completing the full output, add a brief closing prompt:
+After presenting the outline to the user, save it to the Obsidian vault.
+
+Determine the filename from the domain name:
+- Use the domain as the filename stem, e.g., `Rust` → `Rust.md`, `Machine Learning` → `Machine Learning.md`
+- Use the same language as the domain (Chinese or English)
+
+Target path: `$NOTESDIR/learning/<domain>.md`
+
+**Preparation:**
+1. `mkdir -p "$NOTESDIR/learning"`
+
+**Write the note** with this structure:
+
+```
+---
+tags: [learning-outline]
+date: <today's date>
+domain: <domain>
+---
+
+<full outline content from Steps 2–4, exactly as presented to the user>
+```
+
+**If the file ALREADY exists:**
+1. Use the `Read` tool to get the existing content
+2. Ask the user: "已存在 `<domain>.md` 的大纲，要覆盖还是追加（新版本追加到已有文件末尾）？"
+3. If overwrite → replace the file with the new content
+4. If append → add a separator and the new content:
+   ```
+   <existing content>
+
+   ---
+
+   > 更新日期：<YYYY-MM-DD>
+
+   <new outline content>
+   ```
+
+### Step 6: Report
+
+After writing, tell the user:
+- ✅ 大纲已保存到 `$NOTESDIR/learning/<domain>.md`
+- Whether it was a new file, overwrite, or append
+
+Also include the refinement prompt:
 
 > 以上是 [领域] 的完整学习大纲。如需调整，可以告诉我：
 > - 某个分支需要更深/更浅
@@ -211,7 +267,7 @@ After completing the full output, add a brief closing prompt:
 > - 补充某类资源（如中文资料、视频课程）
 > - 调整时间线精度或竞品覆盖范围
 
-If the user responds with adjustments, update only the relevant section — do not regenerate the entire outline.
+If the user responds with adjustments, update **both** the saved file and the conversation output — keep them in sync.
 
 ## Formatting Rules
 
@@ -232,3 +288,8 @@ This skill handles domains such as (but not limited to):
 - Security: Cybersecurity, Web Security, Cryptography
 - General CS: Algorithms & Data Structures, Operating Systems, Distributed Systems
 - Non-tech (also supported): Economics, Product Management, UX Design, etc.
+
+## Error Handling
+
+- If `$NOTESDIR` is not set: stop and tell the user to run `export NOTESDIR=/path/to/vault` and add it to their shell profile (`~/.zshrc` or `~/.bashrc`)
+- If `$NOTESDIR` path doesn't exist as a directory: stop and confirm with the user before creating it

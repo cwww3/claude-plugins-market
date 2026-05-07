@@ -10,26 +10,15 @@
   },
   "plugins": [
     {
-      "name": "learning",
-      "description": "learning guide",
-      "version": "1.5.0",
-      "author": {
-        "name": "cwww3"
-      },
-      "homepage": "https://github.com/cwww3/claude-plugins-market",
-      "tags": ["learning"],
-      "source": "./plugins/learning"
-    },
-    {
       "name": "notes",
-      "description": "Save Claude Code conversation knowledge to Obsidian vault and discuss web-clipped articles from $NOTESDIR/articles/",
-      "version": "1.3.0",
+      "source": "./plugins/notes",
+      "description": "Save Claude Code conversation knowledge to Obsidian vault, discuss web-clipped articles, and generate learning roadmaps — all stored under $NOTESDIR",
+      "version": "1.4.0",
       "author": {
         "name": "cwww3"
       },
       "homepage": "https://github.com/cwww3/claude-plugins-market",
-      "tags": ["notes", "obsidian", "knowledge", "articles"],
-      "source": "./plugins/notes"
+      "tags": ["notes", "obsidian", "knowledge", "articles", "learning"]
     }
   ]
 }
