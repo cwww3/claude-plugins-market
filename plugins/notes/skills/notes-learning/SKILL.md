@@ -62,7 +62,7 @@ Reply with a combo like **A1**, **B2**, etc. — or describe your situation dire
 
 ### Step 2: Generate the 4-Level Outline
 
-**Fast-moving domain check** — before generating, judge whether the domain evolves rapidly (e.g., AI/ML, LLMOps, cloud-native, frontend frameworks, cybersecurity). If yes, proactively search 1–2 authoritative sources to ground the outline in current reality. 用 Tavily 搜索（`basic`，见顶部工具说明），建议查询词：`<domain> current state 2025`、`<domain> roadmap 2025`、`best way to learn <domain> 2025 site:reddit.com`。重点参考官方文档、roadmap.sh、HN/Reddit 社区共识等来源的结果。
+**Fast-moving domain check** — before generating, judge whether the domain evolves rapidly (e.g., AI/ML, LLMOps, cloud-native, frontend frameworks, cybersecurity). If yes, proactively search 1–2 authoritative sources to ground the outline in current reality. 用 Tavily 搜索（`basic`，见顶部工具说明），建议查询词：`<domain> current state`、`<domain> roadmap`、`best way to learn <domain> site:reddit.com`（可附上当前年份以过滤新内容）。重点参考官方文档、roadmap.sh、HN/Reddit 社区共识等来源的结果。
 
 Use findings to adjust the branch structure, module priorities, and timeline before writing anything. For stable domains (algorithms, operating systems, economics), skip this — training data is sufficient.
 
@@ -204,7 +204,7 @@ Add a **📚 推荐学习资源 (Recommended Resources)** section organized by t
 - **🛠️ 实践项目 Projects**: 2–3 project ideas to apply knowledge
 - **🌐 社区 Communities**: 1–2 communities (Discord, Reddit, GitHub orgs)
 
-**Resource freshness** — always fetch latest recommendations from authoritative sources before finalising this section. 用 Tavily 搜索（`advanced`，见顶部工具说明），建议查询词：`best <domain> courses 2025 site:reddit.com`、`<domain> book 2024 OR 2025`、`awesome <domain> github`。重点参考 roadmap.sh、Reddit、HN、官方文档、awesome-* 仓库等来源的结果。
+**Resource freshness** — always fetch latest recommendations from authoritative sources before finalising this section. 用 Tavily 搜索（`advanced`，见顶部工具说明），建议查询词：`best <domain> courses site:reddit.com`、`<domain> book`、`awesome <domain> github`（可附上当前年份以过滤新内容）。重点参考 roadmap.sh、Reddit、HN、官方文档、awesome-* 仓库等来源的结果。
 
 Replace weak recommendations with better ones found. Note the source inline: `（来源：roadmap.sh）`、`（来源：官方文档）`.
 
