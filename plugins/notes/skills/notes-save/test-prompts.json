@@ -7,7 +7,7 @@
   {
     "id": 2,
     "prompt": "/notes-save Docker网络模型",
-    "expected": "以 'Docker网络模型' 为主题，从会话中提取 Docker 网络相关结论，分类到 DevOps 或 Networking 文件夹，写入笔记，若文件已存在则追加并加分隔符"
+    "expected": "以 'Docker网络模型' 为主题，从会话中提取 Docker 网络相关结论，分类到 DevOps 或 Networking 文件夹，写入笔记，若文件已存在则读取现有内容，将新知识整合融入合适位置，重新梳理为一篇连贯文档，而非简单追加"
   },
   {
     "id": 3,

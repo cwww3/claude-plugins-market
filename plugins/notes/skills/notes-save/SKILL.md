@@ -5,7 +5,7 @@ description: >
   notes vault. Use when user says things like: "保存到笔记", "记录这个结论", "记下来", "记到笔记里",
   "把这个知识点记一下", "save this to notes", "add to my notes", "write this to notes", or calls /notes-save.
   Reads the vault path from the $NOTESDIR environment variable. Intelligently categorizes notes into
-  subfolders, and appends to existing files rather than overwriting.
+  subfolders, and merges new knowledge into existing files with reorganization for readability.
 argument-hint: "[topic hint — optional]"
 allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Read, Write
 ---
@@ -23,7 +23,7 @@ Existing categories:
 
 Today's date: !`date +%Y-%m-%d`
 
-## Step 1 — Extract Content
+## Step 1 — Extract New Knowledge
 
 Look at the current conversation and identify what to save:
 - If `$ARGUMENTS` was provided, treat it as a topic hint and find the relevant conclusions
@@ -51,9 +51,15 @@ Look at the current conversation and identify what to save:
   `Networking`, `Security`, `Linux`, `Tools`, `Architecture`, `Languages`, `Algorithms`
 - If the topic spans multiple categories, pick the most specific one
 
-## Step 3 — Format Note Content
+## Step 3 — Write to Vault
 
-Use this Obsidian-compatible markdown structure. **Omit any section that has no content — do not add empty headings.**
+Target path: `$NOTESDIR/<category>/<topic>.md`
+
+### If the file does NOT exist
+
+1. `mkdir -p "$NOTESDIR/<category>"`
+2. Format a new note using this Obsidian-compatible markdown structure.  
+   **Omit any section that has no content — do not add empty headings.**
 
 ```
 # <Topic Name>
@@ -86,41 +92,55 @@ Use sub-headings (###) freely to organize multi-part content.>
 - <Key takeaway 3>
 ```
 
-**Writing rules:**
-- Write in the same language as the primary content (Chinese or English)
-- Prefer completeness over brevity — a longer note that captures everything is better than a short one that loses context
-- Sub-headings and bullet lists over dense paragraphs
-- Every code example from the conversation must be preserved verbatim
+3. Use the `Write` tool to create the file with the formatted content.
 
-## Step 4 — Write to Vault
+### If the file ALREADY exists — Merge and Reorganize
 
-Target path: `$NOTESDIR/<category>/<topic>.md`
+**Goal: produce ONE coherent, well-structured note. Not an append log.**
 
-**If the file does NOT exist:**
-1. `mkdir -p "$NOTESDIR/<category>"`
-2. Use the `Write` tool to create the file with the formatted content from Step 3
+1. Use the `Read` tool to load the full existing content.
 
-**If the file ALREADY exists:**
-1. Use the `Read` tool to get the existing content
-2. Construct the combined content: existing content + separator + new section:
-   ```
-   <existing content>
+2. Analyze both the existing note and the new knowledge side by side:
+   - What does the existing note already cover?
+   - What is genuinely new from this conversation?
+   - Are there sections in the existing note that should be expanded?
+   - Are there overlapping points that should be consolidated?
+   - Does the structure still make sense, or does it need reorganization?
 
-   ---
+3. Write a single merged document following these rules:
 
-   > 补充日期：<YYYY-MM-DD>
+   **Content rules:**
+   - **No duplicates**: if the existing note already explains something, do not repeat it — expand or refine it instead
+   - **Integrate, don't append**: place new knowledge in the most logical position within the document (inside an existing section, as a new sub-heading, or as a new top-level section)
+   - **Consolidate**: if the same concept is scattered across multiple places, merge them into one coherent explanation
+   - **Preserve everything**: do not silently drop any existing content — only restructure or move it
+   - **Update summary**: always refresh the `## 要点总结` section to reflect the full combined knowledge
 
-   <new content from Step 3, omitting the # header since it's already there>
-   ```
-3. Use the `Write` tool to overwrite the file with the combined content
+   **Structure rules:**
+   - Keep the `# <Title>` and the `> 来源 / 日期` header block, updating the date metadata:
+     ```
+     > 来源：Claude Code 对话
+     > 创建：<original creation date>
+     > 更新：<today's date>
+     ```
+   - Use `###` sub-headings freely to separate distinct sub-topics within a section
+   - Sections are ordered by: 背景/问题 → 核心概念 → 示例 → 注意事项 → 要点总结
+   - New top-level sections (e.g., `## 进阶用法`, `## 对比`) may be added if the new knowledge genuinely introduces a new dimension not covered by existing sections
 
-## Step 5 — Report
+   **Readability rules:**
+   - The final note must read as a document written by one author at one time — no "补充", "追加", or date-stamped dividers mid-document
+   - Prefer flowing prose or well-structured bullet lists over dense paragraphs
+   - Every code example must be preserved verbatim in a fenced code block with language tag
+
+4. Use the `Write` tool to overwrite the file with the reorganized content.
+
+## Step 4 — Report
 
 After writing, tell the user:
 - ✅ File path saved to (full path)
 - Category chosen and why
-- Whether it was a new file or an append
-- Topic name used
+- Whether it was a new file or a merge+reorganize
+- A one-sentence description of what new knowledge was integrated
 
 ## Error Handling
 

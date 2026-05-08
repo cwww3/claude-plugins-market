@@ -13,7 +13,7 @@
       "name": "notes",
       "source": "./plugins/notes",
       "description": "Save Claude Code conversation knowledge to Obsidian vault, discuss web-clipped articles, and generate learning roadmaps — all stored under $NOTESDIR",
-      "version": "1.5.0",
+      "version": "1.6.0",
       "author": {
         "name": "cwww3"
       },
