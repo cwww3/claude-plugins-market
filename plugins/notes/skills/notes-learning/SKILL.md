@@ -5,7 +5,7 @@ description: >
   especially technical and programming fields (e.g., AI/ML, backend development, system design,
   cloud computing, a programming language, a framework, cybersecurity, data science, DevOps, etc.),
   and save the generated outline to $NOTESDIR/learning/. Also distill the roadmap's domain structure
-  into learning/index.md and, when a matching category exists, the category index.md. Use this skill whenever the user says
+  into learning/index.md and, when a matching category exists, use the roadmap structure to improve that category's index.md without linking back to learning files. Use this skill whenever the user says
   things like "I want to learn X", "give me a learning roadmap for X", "how do I get started with X",
   "help me learn X systematically", "give me an outline for X", "梳理X的学习大纲", "我想学X",
   "帮我规划X的学习路径", or any similar intent to systematically learn or understand a field.
@@ -293,12 +293,15 @@ Only update a category index if the category directory exists or if Step 2 would
 
 When updating a category index:
 1. Read the existing `index.md` if present.
-2. Add a link to the learning outline under a suitable module, using `[[../learning/<domain>|<domain> 学习路线]]` if the index is inside a category folder.
-3. If the roadmap introduces a clean high-level module structure that the category index lacks, add only broad modules, not the full 4-level outline.
-4. Keep the category index as a domain map, not a learning-plan dump.
+2. Use the learning outline's branch/module structure to improve the category's knowledge map.
+3. Add or adjust broad domain modules when the roadmap reveals a clearer architecture for that category.
+4. Place existing category notes under the best-fitting modules when they are already present in the category.
+5. Do **not** add links to files under `$NOTESDIR/learning/` from category indexes. Category indexes should describe the note category's knowledge architecture, not point back to learning roadmaps.
+6. Keep the category index as a domain map, not a learning-plan dump.
 
 Index quality rules:
 - Do not paste the full learning outline into any index
+- Do not link category indexes to `learning/<domain>.md` or `../learning/<domain>`
 - Do not include temporary generation notes, resource lists, or update logs
 - Do not add "待学习", "本次生成", or "整理建议" sections
 - Keep index entries concise and stable
