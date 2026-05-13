@@ -1,13 +1,9 @@
 ---
 name: notes-discuss
 description: >
-  Read and discuss web clippings saved via Obsidian Web Clipper. Lists articles from
-  $NOTESDIR/articles/, reads the selected one, presents a comprehensive in-depth analysis
-  (not a brief summary), then guides the user through deep, detailed discussion to form
-  conclusions. After discussion, remind the user they can save conclusions by saying
-  "保存到笔记" (which triggers notes-save, including category index.md maintenance). Trigger: "讨论文章", "看看收集的文章",
+  Use when the user wants to discuss, analyze, or process web-clipped articles in
+  $NOTESDIR/articles/. Trigger on phrases like "讨论文章", "看看收集的文章",
   "处理文章", "帮我看这篇文章", "discuss this article", or /notes-discuss.
-  Uses $NOTESDIR environment variable.
 ---
 
 # Notes Discuss — Discuss Collected Articles

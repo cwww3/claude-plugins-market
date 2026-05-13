@@ -1,12 +1,10 @@
 ---
 name: notes-save
 description: >
-  Save knowledge, conclusions, or key insights from the current conversation to the user's Obsidian
-  notes vault. Use when user says things like: "保存到笔记", "记录这个结论", "记下来", "记到笔记里",
-  "把这个知识点记一下", "save this to notes", "add to my notes", "write this to notes", or calls /notes-save.
-  Reads the vault path from the $NOTESDIR environment variable. Intelligently categorizes notes into
-  subfolders, merges new knowledge into existing files, and maintains category index.md files with
-  links to saved notes. Trigger: "保存到笔记", "记录这个结论", "记下来", "save this to notes", /notes-save.
+  Use when the user wants to save knowledge, conclusions, insights, or key points from
+  the current conversation to their Obsidian notes vault. Trigger on phrases like
+  "保存到笔记", "记录这个结论", "记下来", "把这个知识点记一下",
+  "save this to notes", "add to my notes", or /notes-save.
 ---
 
 # Notes Save — Save to Obsidian Vault

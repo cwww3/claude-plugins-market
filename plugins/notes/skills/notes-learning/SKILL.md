@@ -1,16 +1,9 @@
 ---
 name: notes-learning
 description: >
-  Generate a complete, systematic, and detailed learning roadmap/outline for any knowledge domain,
-  especially technical and programming fields (e.g., AI/ML, backend development, system design,
-  cloud computing, a programming language, a framework, cybersecurity, data science, DevOps, etc.),
-  and save the generated outline to $NOTESDIR/learning/. Also distill the roadmap's domain structure
-  into learning/index.md and, when a matching category exists, use the roadmap structure to improve that category's index.md without linking back to learning files. Use this skill whenever the user says
-  things like "I want to learn X", "give me a learning roadmap for X", "how do I get started with X",
-  "help me learn X systematically", "give me an outline for X", "梳理X的学习大纲", "我想学X",
-  "帮我规划X的学习路径", or any similar intent to systematically learn or understand a field.
-  Always trigger this skill for structured learning requests — even if the domain seems simple,
-  the user benefits from a comprehensive breakdown.
+  Use when the user wants a systematic learning roadmap, learning outline, or study path
+  for a domain or technology. Trigger on phrases like "我想学X", "帮我规划X的学习路径",
+  "梳理X的学习大纲", "how do I get started with X", "learning roadmap", or /notes-learning.
 ---
 
 # Notes Learning — Generate & Save Learning Outline
