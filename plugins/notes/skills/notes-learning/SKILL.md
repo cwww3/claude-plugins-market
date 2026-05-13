@@ -4,14 +4,15 @@ description: >
   Generate a complete, systematic, and detailed learning roadmap/outline for any knowledge domain,
   especially technical and programming fields (e.g., AI/ML, backend development, system design,
   cloud computing, a programming language, a framework, cybersecurity, data science, DevOps, etc.),
-  and save the generated outline to $NOTESDIR/learning/. Use this skill whenever the user says
+  and save the generated outline to $NOTESDIR/learning/. Also distill the roadmap's domain structure
+  into learning/index.md and, when a matching category exists, the category index.md. Use this skill whenever the user says
   things like "I want to learn X", "give me a learning roadmap for X", "how do I get started with X",
   "help me learn X systematically", "give me an outline for X", "梳理X的学习大纲", "我想学X",
   "帮我规划X的学习路径", or any similar intent to systematically learn or understand a field.
   Always trigger this skill for structured learning requests — even if the domain seems simple,
   the user benefits from a comprehensive breakdown.
 argument-hint: "[domain — optional, e.g. 'Rust' or 'Kubernetes']"
-allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Bash(curl *), Read, Write
+allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Bash(curl *), Read, Write, Edit
 ---
 
 # Notes Learning — Generate & Save Learning Outline
@@ -253,11 +254,67 @@ domain: <domain>
    <new outline content>
    ```
 
-### Step 6: Report
+### Step 6: Maintain Learning Indexes
+
+After saving the learning outline, distill its knowledge structure into indexes. The goal is not to duplicate the full roadmap, but to make the roadmap discoverable and use its high-level structure to improve the vault's knowledge map.
+
+#### 6.1 Update `$NOTESDIR/learning/index.md`
+
+This index catalogs all learning roadmaps.
+
+If it does NOT exist, create it:
+
+```
+# 学习路线索引
+
+这个索引汇总系统学习路线，并按领域归类。
+
+## 领域路线
+
+### <broad domain group>
+
+- [[<domain>]]：<one-line summary of the learning goal and scope>
+```
+
+If it exists:
+1. Use `Read` to load it.
+2. Add or update the `[[<domain>]]` entry under the best-fitting broad domain group.
+3. If no group fits, add a broad group such as `AI 与机器学习`, `后端与架构`, `前端`, `DevOps 与云原生`, `安全`, `数据`, `计算机基础`, or another stable domain group.
+4. Avoid duplicate links.
+
+#### 6.2 Update related category `index.md` when appropriate
+
+If the roadmap domain maps naturally to an existing vault category, update that category index too:
+
+- Domain `AI`, `Machine Learning`, `Deep Learning`, `NLP`, `LLM`, `Computer Vision`, `MLOps` → likely `$NOTESDIR/AI/index.md`
+- Domain `Backend`, `System Design`, `Distributed Systems` → likely `$NOTESDIR/Backend/index.md` or `$NOTESDIR/Architecture/index.md`
+- Domain `Kubernetes`, `DevOps`, `Cloud` → likely `$NOTESDIR/DevOps/index.md`
+- Domain `Security`, `Cybersecurity` → likely `$NOTESDIR/Security/index.md`
+
+Only update a category index if the category directory exists or if Step 2 would clearly choose that category. Do not create many new category folders just because the roadmap mentions them.
+
+When updating a category index:
+1. Read the existing `index.md` if present.
+2. Add a link to the learning outline under a suitable module, using `[[../learning/<domain>|<domain> 学习路线]]` if the index is inside a category folder.
+3. If the roadmap introduces a clean high-level module structure that the category index lacks, add only broad modules, not the full 4-level outline.
+4. Keep the category index as a domain map, not a learning-plan dump.
+
+Index quality rules:
+- Do not paste the full learning outline into any index
+- Do not include temporary generation notes, resource lists, or update logs
+- Do not add "待学习", "本次生成", or "整理建议" sections
+- Keep index entries concise and stable
+- Prefer high-level branches from the roadmap as module names only when they improve the domain map
+
+Use `Write` for a new index or a major reorganization; use `Edit` for targeted additions.
+
+### Step 7: Report
 
 After writing, tell the user:
 - ✅ 大纲已保存到 `$NOTESDIR/learning/<domain>.md`
-- Whether it was a new file, overwrite, or append
+- ✅ 学习路线索引已更新：`$NOTESDIR/learning/index.md`
+- ✅ 相关分类索引是否更新（if applicable）
+- Whether the outline was a new file, overwrite, or append
 
 Also include the refinement prompt:
 

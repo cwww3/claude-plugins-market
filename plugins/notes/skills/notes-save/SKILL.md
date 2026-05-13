@@ -5,9 +5,10 @@ description: >
   notes vault. Use when user says things like: "保存到笔记", "记录这个结论", "记下来", "记到笔记里",
   "把这个知识点记一下", "save this to notes", "add to my notes", "write this to notes", or calls /notes-save.
   Reads the vault path from the $NOTESDIR environment variable. Intelligently categorizes notes into
-  subfolders, and merges new knowledge into existing files with reorganization for readability.
+  subfolders, merges new knowledge into existing files, and maintains category index.md files with
+  links to saved notes. Trigger: "保存到笔记", "记录这个结论", "记下来", "save this to notes", /notes-save.
 argument-hint: "[topic hint — optional]"
-allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Read, Write
+allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Read, Write, Edit
 ---
 
 # Notes Save — Save to Obsidian Vault
@@ -134,12 +135,66 @@ Use sub-headings (###) freely to organize multi-part content.>
 
 4. Use the `Write` tool to overwrite the file with the reorganized content.
 
-## Step 4 — Report
+## Step 4 — Maintain Category Index
+
+After saving or merging the note, update the category index at:
+
+`$NOTESDIR/<category>/index.md`
+
+The index is not a changelog and should not be organized around the current conversation. It should describe the knowledge domain for that category, then link notes into the appropriate module.
+
+### If `index.md` does NOT exist
+
+Create it with this structure:
+
+```
+# <Category> 知识索引
+
+这个索引按 <Category> 领域的知识结构组织笔记。
+
+## 领域模块
+
+### <major module 1>
+
+- [[<topic>]]：<one-line description>
+
+### <major module 2>
+
+- 暂无笔记
+```
+
+Guidelines:
+- Define broad, stable modules for the category first; do not build the index only from the current note
+- Keep modules complete enough to guide future notes, but not overly detailed
+- Add the saved note under the best-fitting module using an Obsidian wikilink
+- Use `[[<topic>]]`, not absolute paths
+
+### If `index.md` ALREADY exists
+
+1. Use `Read` to load it.
+2. Check whether the saved note is already linked.
+3. If already linked, only adjust the one-line description if the note's meaning changed.
+4. If not linked, add it under the best-fitting existing module.
+5. If no existing module fits, add one broad module and place the link there.
+6. Preserve the index's existing structure and wording as much as possible.
+
+Index quality rules:
+- Do not add "整理建议", "待处理", "本次保存", or discussion notes to `index.md`
+- Do not include merge/split/review commentary in the index
+- Avoid duplicate links to the same note
+- Prefer stable domain modules over transient conversation topics
+- Keep descriptions concise: one sentence or less
+
+Use `Write` if creating or fully reorganizing the index; use `Edit` for small targeted updates.
+
+## Step 5 — Report
 
 After writing, tell the user:
 - ✅ File path saved to (full path)
+- ✅ Index path updated (full path)
 - Category chosen and why
 - Whether it was a new file or a merge+reorganize
+- Whether the index entry was added, updated, or already present
 - A one-sentence description of what new knowledge was integrated
 
 ## Error Handling

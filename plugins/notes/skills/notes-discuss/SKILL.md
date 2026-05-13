@@ -5,7 +5,7 @@ description: >
   $NOTESDIR/articles/, reads the selected one, presents a comprehensive in-depth analysis
   (not a brief summary), then guides the user through deep, detailed discussion to form
   conclusions. After discussion, remind the user they can save conclusions by saying
-  "保存到笔记" (which triggers notes-save). Trigger: "讨论文章", "看看收集的文章",
+  "保存到笔记" (which triggers notes-save, including category index.md maintenance). Trigger: "讨论文章", "看看收集的文章",
   "处理文章", "帮我看这篇文章", "discuss this article", or /notes-discuss.
   Uses $NOTESDIR environment variable.
 argument-hint: "[filename — optional, picks a specific article]"
@@ -99,7 +99,7 @@ Use this structure (expand each section with substantive detail; skip only if tr
 <Connect to broader knowledge domains:
 - How does this relate to well-known principles, patterns, or technologies?
 - Does it reinforce, contradict, or extend common understanding?
-- Check the user's vault categories for related notes — mention any connections found>
+- Check the user's vault categories for related notes and category `index.md` files; mention where the article's conclusions would fit in the existing knowledge structure>
 ```
 
 After presenting the complete analysis, ask: "分析完了。你对这篇文章的哪些方面想深入讨论？"
@@ -118,7 +118,9 @@ Now engage in substantive, detailed discussion. This is the core value — don't
 
 **Depth over breadth:** Pick 2–3 of the most interesting directions and explore them thoroughly, rather than skimming all topics. Follow the user's curiosity — if they latch onto one aspect, go deeper on that.
 
-**Conclusion prompting:** When a thread of discussion reaches a meaningful insight or decision, pause and explicitly remind: "这个结论值得记录下来。说'保存到笔记'就可以存入你的 Obsidian 笔记。"
+**Conclusion prompting:** When a thread of discussion reaches a meaningful insight or decision, pause and explicitly remind: "这个结论值得记录下来。说'保存到笔记'就可以存入你的 Obsidian 笔记，并自动维护对应分类的 index.md。"
+
+**Index handoff:** If the discussion identifies a likely category or module for the conclusion, say it explicitly so notes-save can use it as context. Example: "这个结论适合放到 AI / Transformer 与大模型架构 模块。" Do not edit index.md from notes-discuss; notes-save owns writing notes and maintaining indexes.
 
 ## Error Handling
 
