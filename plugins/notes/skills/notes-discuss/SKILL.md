@@ -8,8 +8,6 @@ description: >
   "保存到笔记" (which triggers notes-save, including category index.md maintenance). Trigger: "讨论文章", "看看收集的文章",
   "处理文章", "帮我看这篇文章", "discuss this article", or /notes-discuss.
   Uses $NOTESDIR environment variable.
-argument-hint: "[filename — optional, picks a specific article]"
-allowed-tools: Bash(test -f *), Bash(ls *), Bash(date *), Read
 ---
 
 # Notes Discuss — Discuss Collected Articles

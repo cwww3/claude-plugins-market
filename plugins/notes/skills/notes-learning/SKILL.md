@@ -11,8 +11,6 @@ description: >
   "帮我规划X的学习路径", or any similar intent to systematically learn or understand a field.
   Always trigger this skill for structured learning requests — even if the domain seems simple,
   the user benefits from a comprehensive breakdown.
-argument-hint: "[domain — optional, e.g. 'Rust' or 'Kubernetes']"
-allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Bash(curl *), Read, Write, Edit
 ---
 
 # Notes Learning — Generate & Save Learning Outline

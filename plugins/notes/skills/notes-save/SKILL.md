@@ -7,8 +7,6 @@ description: >
   Reads the vault path from the $NOTESDIR environment variable. Intelligently categorizes notes into
   subfolders, merges new knowledge into existing files, and maintains category index.md files with
   links to saved notes. Trigger: "保存到笔记", "记录这个结论", "记下来", "save this to notes", /notes-save.
-argument-hint: "[topic hint — optional]"
-allowed-tools: Bash(test -f *), Bash(mkdir -p *), Bash(ls *), Bash(date *), Read, Write, Edit
 ---
 
 # Notes Save — Save to Obsidian Vault
