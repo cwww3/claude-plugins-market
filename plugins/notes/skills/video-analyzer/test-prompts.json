@@ -1,0 +1,18 @@
+[
+  {
+    "prompt": "/bilibili-analyzer https://www.bilibili.com/video/BV1HTGy68EUF",
+    "description": "分析一个知识类B站视频（19分钟，主题：意图识别）"
+  },
+  {
+    "prompt": "/bilibili-analyzer https://www.bilibili.com/video/BV1aj5t6KER8",
+    "description": "分析一个实操类B站视频（76分钟，主题：意图识别深度讲解）"
+  },
+  {
+    "prompt": "/bilibili-analyzer https://www.bilibili.com/video/BV1xx411c7mD",
+    "description": "分析一个中等长度的B站视频"
+  },
+  {
+    "prompt": "帮我分析这个B站视频 https://www.bilibili.com/video/BV1HTGy68EUF",
+    "description": "中文触发：分析B站视频"
+  }
+]
